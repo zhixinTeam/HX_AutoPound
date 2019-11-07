@@ -1,0 +1,4 @@
+Update P_PoundLog Set P_OverNet=(
+ case when (P_MValue-P_PValue) > IsNull( (Select Top 1 case when IsNull(T_MaxWeight,0) > 0 then T_MaxWeight else 9999999 end From Sys_Truck Where T_Truck=P_Truck), 9999999)
+ then 'Y' Else 'N' end
+) Where P_MDate>='2019-08-12' And P_MDate<'2019-08-12'
