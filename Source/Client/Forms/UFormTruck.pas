@@ -104,14 +104,26 @@ begin
     Exit;
   end;
 
-  nStr := 'Update %s Set T_FixPound=''%s'',T_MaxWeight=%s Where R_ID In (%s)';
-  nStr := Format(nStr, [sTable_Truck, EditPound.Text, EditNet.Text, FRecords]);
-  FDM.ExecuteSQL(nStr);
+  if EditNet.Properties.ReadOnly then //只更新磅站
+  begin
+    nStr := 'Update %s Set T_FixPound=''%s'' Where R_ID In (%s)';
+    nStr := Format(nStr, [sTable_Truck, EditPound.Text, FRecords]);
+    FDM.ExecuteSQL(nStr);
 
-  nStr := Format('磅站:[%s -> %s] ', [FPound, EditPound.Text]) +
-          Format('上限:[%.2f -> %s] ', [FMaxNet, EditNet.Text]) +
-          Format('车辆:[%s]', [FTrucks]);
-  FDM.WriteSysLog('车辆设置', EditTruck.Text, nStr);
+    nStr := Format('磅站:[%s -> %s] ', [FPound, EditPound.Text]) +
+            Format('车辆:[%s]', [FTrucks]);
+    FDM.WriteSysLog('车辆设置', EditTruck.Text, nStr);
+  end else
+  begin
+    nStr := 'Update %s Set T_FixPound=''%s'',T_MaxWeight=%s Where R_ID In (%s)';
+    nStr := Format(nStr, [sTable_Truck, EditPound.Text, EditNet.Text, FRecords]);
+    FDM.ExecuteSQL(nStr);
+
+    nStr := Format('磅站:[%s -> %s] ', [FPound, EditPound.Text]) +
+            Format('上限:[%.2f -> %s] ', [FMaxNet, EditNet.Text]) +
+            Format('车辆:[%s]', [FTrucks]);
+    FDM.WriteSysLog('车辆设置', EditTruck.Text, nStr);
+  end;
 
   ModalResult := mrOk;
 end;
