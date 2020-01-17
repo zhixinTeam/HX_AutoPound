@@ -248,8 +248,18 @@ inherited fFrameNormal: TfFrameNormal
     Left = 62
     Top = 326
     object BaseN4: TMenuItem
-      Caption = #33258#21160#21015#23485
-      OnClick = BaseN4Click
+      Caption = #8251#33258#21160#21015#23485#8251
+      Enabled = False
+    end
+    object BaseN6: TMenuItem
+      Tag = 10
+      Caption = #24403#21069#34920#22836'('#21015')'
+      OnClick = BaseN6Click
+    end
+    object BaseN7: TMenuItem
+      Tag = 20
+      Caption = #25152#26377#34920#22836'('#21015')'
+      OnClick = BaseN6Click
     end
   end
 end

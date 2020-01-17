@@ -25,7 +25,8 @@ uses
   {$IFDEF OldTruckProber}UMgrTruckProbe_1,{$ELSE}UMgrTruckProbe,{$ENDIF}
   SysUtils, USysLoger, USysMAC, U900Reader, UMgrPoundTunnels,
   {$IFDEF HYReader}UMgrRFID102,{$ELSE}UMgrJinMai915,{$ENDIF}
-  UMgrRemoteVoice, UTaskMonitor, UMemDataPool, USysBusiness, USysConst;
+  UMgrRemoteVoice, UMgrBXFontCard, UTaskMonitor, UMemDataPool, USysBusiness,
+  USysConst;
 
 //Desc: 初始化系统对象
 procedure InitSystemObject;
@@ -60,6 +61,11 @@ begin
 
   gVoiceHelper.LoadConfig(gPath + 'Voice.xml');
   //语音服务
+
+  {$IFDEF BXFontCard}
+  gBXFontCardManager := TBXFontCardManager.Create;
+  gBXFontCardManager.LoadConfig(gPath + 'BXFontLED.xml');
+  {$ENDIF}
 end;
 
 //Desc: 运行系统对象
@@ -70,6 +76,7 @@ begin
 
   {$IFNDEF DEBUG}
     gVoiceHelper.StartVoice;
+    gBXFontCardManager.StartService;
 
     {$IFNDEF OldTruckProber}
     gProberManager.StartProber;
@@ -85,7 +92,9 @@ begin
   {$ELSE}
   gJMCardManager.StopRead;
   {$ENDIF}
+  
   gVoiceHelper.StopVoice;
+  gBXFontCardManager.StopService;
 
   {$IFNDEF OldTruckProber}
   gProberManager.StopProber;

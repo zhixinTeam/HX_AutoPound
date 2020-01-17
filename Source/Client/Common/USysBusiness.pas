@@ -11,7 +11,7 @@ uses
   Windows, Classes, SysUtils, UDataModule, ULibFun, UFormCtrl, UAdjustForm,
   UMgrPoundTunnels, HKVNetSDK, UMgrRemoteVoice, UTaskMonitor,
   {$IFDEF OldTruckProber}UMgrTruckProbe_1,{$ELSE}UMgrTruckProbe,{$ENDIF}
-  USysLoger, USysDB, USysConst;
+  UMgrBXFontCard, USysLoger, USysDB, USysConst;
 
 type
   PPoundItem = ^TPoundItem;
@@ -581,11 +581,21 @@ begin
       //播发语音
       gProberManager.OpenTunnel(nTunnel.FProber);
       //开绿灯
+
+      {$IFDEF BXFontCard}
+      gBXFontCardManager.Display(Format('车牌%s过磅完毕', [nData.FTruck]),
+        Format('重量: %.2f吨', [nData.FMValue]));
+      {$ENDIF}
     end else
     begin
       nStr := '车辆%s请换%s磅称重';
       nStr := Format(nStr, [nData.FTruck, nData.FFixPound]);
       gVoiceHelper.PlayVoice(nStr);
+
+      {$IFDEF BXFontCard}
+      gBXFontCardManager.Display(Format('车牌%s过磅不成功', [nData.FTruck]),
+        Format('请换%s磅称重', [nData.FFixPound]));
+      {$ENDIF}
     end;
   except
     on E: Exception do

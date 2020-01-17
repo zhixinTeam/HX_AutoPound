@@ -29,3 +29,6 @@
 
 {$DEFINE HYReader}
 //ÆôÓÃ»ªÒË¶Á¿¨Æ÷
+
+{$DEFINE BXFontCard}
+//ÆôÓÃÑö°î×Ö¿â¿¨LEDÆÁ

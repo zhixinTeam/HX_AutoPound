@@ -50,6 +50,8 @@ type
     BasePMenu2: TPopupMenu;
     BaseN4: TMenuItem;
     BaseN5: TMenuItem;
+    BaseN6: TMenuItem;
+    BaseN7: TMenuItem;
     procedure BtnRefreshClick(Sender: TObject);
     procedure BtnExportClick(Sender: TObject);
     procedure BtnPrintClick(Sender: TObject);
@@ -64,7 +66,7 @@ type
     procedure cxView1KeyPress(Sender: TObject; var Key: Char);
     procedure cxView1DataControllerGroupingChanged(Sender: TObject);
     procedure BaseN2Click(Sender: TObject);
-    procedure BaseN4Click(Sender: TObject);
+    procedure BaseN6Click(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -525,9 +527,12 @@ begin
 end;
 
 //Desc: вт╤╞ап©М
-procedure TfFrameNormal.BaseN4Click(Sender: TObject);
+procedure TfFrameNormal.BaseN6Click(Sender: TObject);
 begin
-  GetSelecedColumnFilterData(False).ApplyBestFit();
+  case TComponent(Sender).Tag of
+   10: GetSelecedColumnFilterData(False).ApplyBestFit();
+   20: cxView1.ApplyBestFit();
+  end;
 end;
 
 end.

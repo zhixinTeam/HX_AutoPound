@@ -105,6 +105,7 @@ ResourceString
   sFlag_PrePValidMon  = 'ValidOneMonth';             //预置皮重当月有效
 
   {*数据表*}
+  sTable_Factorys     = 'Sys_Factorys';              //工厂列表
   sTable_Group        = 'Sys_Group';                 //用户组
   sTable_User         = 'Sys_User';                  //用户表
   sTable_Menu         = 'Sys_Menu';                  //菜单表
@@ -131,6 +132,23 @@ ResourceString
   sTable_PoundBak     = 'P_PoundBak';                //过磅作废
 
   {*新建表*}
+  sSQL_NewFactorys = 'Create Table $Table(R_ID $Inc, F_ID varChar(32),' +
+       'F_Name varChar(100), F_MITUrl varChar(128), F_HardUrl varChar(128),' +
+       'F_WechatUrl varChar(128), F_DBConn varChar(500),' +
+       'F_Valid Char(1), F_Index Integer)';
+  {-----------------------------------------------------------------------------
+   工厂列表: Factorys
+   *.R_ID: 编号
+   *.F_ID: 工厂编号
+   *.F_Name: 工厂名称
+   *.F_MITUrl: 中间件地址
+   *.F_HardUrl: 硬件守护地址
+   *.F_WechatUrl: 微信服务地址
+   *.F_DBConn: 数据库连接配置
+   *.F_Valid: 有效(Y/N)
+   *.F_Index: 加载顺序
+  -----------------------------------------------------------------------------}
+
   sSQL_NewSysDict = 'Create Table $Table(D_ID $Inc, D_Name varChar(15),' +
        'D_Desc varChar(30), D_Value varChar(50), D_Memo varChar(20),' +
        'D_ParamA $Float, D_ParamB varChar(50), D_Index Integer Default 0)';
@@ -379,14 +397,13 @@ end;
 procedure InitSysTableList;
 begin
   gSysTableList := TList.Create;
-
+  AddSysTableItem(sTable_Factorys, sSQL_NewFactorys);
   AddSysTableItem(sTable_SysDict, sSQL_NewSysDict);
 
   AddSysTableItem(sTable_ExtInfo, sSQL_NewExtInfo);
-
   AddSysTableItem(sTable_SysLog, sSQL_NewSysLog);
-
   AddSysTableItem(sTable_BaseInfo, sSQL_NewBaseInfo);
+
   AddSysTableItem(sTable_SerialBase, sSQL_NewSerialBase);
   AddSysTableItem(sTable_SerialStatus, sSQL_NewSerialStatus);
   AddSysTableItem(sTable_Picture, sSQL_NewPicture);
