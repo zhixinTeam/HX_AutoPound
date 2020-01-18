@@ -14,7 +14,7 @@ uses
   //----------------------------------------------------------------------------
   uniGUIAbstractClasses, uniGUITypes, uniGUIClasses, uniGUIBaseClasses,
   uniGUISessionManager, uniGUIApplication, uniTreeView, uniGUIForm,
-  uniGUImForm, uniDBGrid, uniStringGrid, uniComboBox,
+  uniGUImForm, uniDBGrid, unimDBGrid, uniStringGrid, uniComboBox,
   //----------------------------------------------------------------------------
   UBaseObject, UManagerGroup, ULibFun, USysDB, USysConst, USysFun;
 
@@ -83,6 +83,12 @@ procedure BuildDBGridColumn(const nEntity: string; const nGrid: TUniDBGrid;
 //构建表格列
 procedure DoStringGridColumnResize(const nGrid: TObject;
   const nParam: TUniStrings);
+procedure UserDefineGrid(const nForm: string; const nGrid: TUniDBGrid;
+  const nLoad: Boolean; const nIni: TIniFile = nil);
+procedure UserDefineStringGrid(const nForm: string; const nGrid: TUniStringGrid;
+  const nLoad: Boolean; const nIni: TIniFile = nil);
+procedure UserDefineMGrid(const nForm: string; const nGrid: TUnimDBGrid;
+  const nLoad: Boolean; const nIni: TIniFile = nil);
 //用户自定义表格
 
 implementation
@@ -1549,6 +1555,82 @@ begin
         if nIdx <> nCount then nStr := nStr + ';';
       end;
       nTmp.WriteString(nForm, 'GridWidth_' + nGrid.Name, nStr);
+    end;
+  finally
+    gMG.FObjectPool.Release(nList);
+    if not Assigned(nIni) then
+      nTmp.Free;
+    //xxxxx
+  end;
+end;
+
+//Date: 2020-01-15
+//Parm: 窗体名;表格;读取
+//Desc: 读写nForm.nGrid的用户配置
+procedure UserDefineMGrid(const nForm: string; const nGrid: TUnimDBGrid;
+  const nLoad: Boolean; const nIni: TIniFile = nil);
+var nStr: string;
+    i,j,nCount: Integer;
+    nTmp: TIniFile;
+    nList: TStrings;
+begin
+  nTmp := nil;
+  nList := nil;
+
+  with TStringHelper do
+  try
+    if Assigned(nIni) then
+         nTmp := nIni
+    else nTmp := UserConfigFile;
+
+    nCount := nGrid.Columns.Count - 1;
+    //column num
+
+    if nLoad then
+    begin
+      nList := gMG.FObjectPool.Lock(TStrings) as TStrings;
+      nStr := nTmp.ReadString(nForm, 'GridWidth_' + nGrid.Name, '');
+      if Split(nStr, nList, nGrid.Columns.Count) then
+      begin
+        for i := 0 to nCount do
+         if IsNumber(nList[i], False) then
+          nGrid.Columns[i].Width := StrToInt(nList[i]);
+        //apply width
+      end;
+
+      if not UniMainModule.FGridColumnAdjust then //调整时全部显示
+      begin
+        nStr := nTmp.ReadString(nForm, 'GridVisible_' + nGrid.Name, '');
+        if Split(nStr, nList, nGrid.Columns.Count) then
+        begin
+          for i := 0 to nCount do
+            nGrid.Columns[i].Visible := nList[i] = '1';
+          //apply visible
+        end;
+      end;
+    end else
+    begin
+      if UniMainModule.FGridColumnAdjust then //save manual adjust grid
+      begin
+        nStr := '';
+        for i := 0 to nCount do
+        begin
+          nStr := nStr + IntToStr(nGrid.Columns[i].Width);
+          if i <> nCount then nStr := nStr + ';';
+        end;
+        nTmp.WriteString(nForm, 'GridWidth_' + nGrid.Name, nStr);
+      end else
+      begin
+        nStr := '';
+        for i := 0 to nCount do
+        begin
+          if nGrid.Columns[i].Visible then
+               nStr := nStr + '1'
+          else nStr := nStr + '0';
+          if i <> nCount then nStr := nStr + ';';
+        end;
+        nTmp.WriteString(nForm, 'GridVisible_' + nGrid.Name, nStr);
+      end;
     end;
   finally
     gMG.FObjectPool.Release(nList);

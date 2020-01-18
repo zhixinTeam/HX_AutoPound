@@ -260,7 +260,8 @@ ResourceString
   sCloseQuery         = '确定要退出程序吗?';         //主窗口退出
 
   sWebFlag           = 'web';                        //菜单标识
-  sCheckFlag          = '√';                         ///选中标记
+  sCheckFlag         = '√';                          //选中标记
+  sCheckFlag2        = 'x';
   sEvent_StrGridColumnResize = 'StrGridColResize';   //表格调整列表
 
 implementation

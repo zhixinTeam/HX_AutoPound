@@ -59,8 +59,8 @@ end;
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
 var nIdx: Integer;
 begin
-  FGridColumnAdjust := False;
-  //默认不允许调整表格列宽和顺序
+  FGridColumnAdjust := True;
+  //默认允许调整表格列宽和顺序
 
   FUserConfig := gSysParam;
   //复制全局参数

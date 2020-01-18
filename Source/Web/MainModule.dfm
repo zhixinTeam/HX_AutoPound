@@ -3,6 +3,7 @@ object UniMainModule: TUniMainModule
   OnCreate = UniGUIMainModuleCreate
   OnDestroy = UniGUIMainModuleDestroy
   MonitoredKeys.Keys = <>
+  ExtLocale = 'zh_CN'
   ModernToolkitModes.Phone = mtNormal
   Height = 310
   Width = 522
