@@ -151,6 +151,11 @@
             <FormType>dfm</FormType>
             <DesignClass>TUnimForm</DesignClass>
         </DCCReference>
+        <DCCReference Include="UFormGetData.pas">
+            <Form>fFormGetData</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUnimForm</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -56,7 +56,7 @@ inherited fFormSetMate: TfFormSetMate
       Left = 0
       Top = 35
       Width = 314
-      Height = 401
+      Height = 404
       Hint = ''
       Align = alClient
       DataSource = DataSource1
@@ -83,9 +83,9 @@ inherited fFormSetMate: TfFormSetMate
     end
     object PanelBottom: TUnimContainerPanel
       Left = 0
-      Top = 436
+      Top = 439
       Width = 314
-      Height = 38
+      Height = 35
       Hint = ''
       Align = alBottom
       Layout = 'hbox'
@@ -93,7 +93,7 @@ inherited fFormSetMate: TfFormSetMate
         Left = 0
         Top = 0
         Width = 110
-        Height = 38
+        Height = 35
         Hint = ''
         ShowHint = True
         ParentShowHint = False
@@ -107,7 +107,7 @@ inherited fFormSetMate: TfFormSetMate
         Left = 110
         Top = 0
         Width = 110
-        Height = 38
+        Height = 35
         Hint = ''
         ShowHint = True
         ParentShowHint = False
@@ -121,7 +121,7 @@ inherited fFormSetMate: TfFormSetMate
         Left = 224
         Top = 0
         Width = 90
-        Height = 38
+        Height = 35
         Hint = ''
         Align = alRight
         Caption = #35774#32622
@@ -141,5 +141,26 @@ inherited fFormSetMate: TfFormSetMate
     DataSet = ClientDS1
     Left = 144
     Top = 112
+  end
+  object MenuBottom: TUnimMenu
+    Items = <
+      item
+        Caption = #20840#37096#36873#20013
+        MenuId = 0
+      end
+      item
+        Caption = #20840#37096#21462#28040
+        MenuId = 1
+      end
+      item
+        Caption = #20840#37096#21453#36873
+        MenuId = 2
+      end>
+    Side = msBottom
+    Cover = True
+    Visible = False
+    OnClick = MenuBottomClick
+    Left = 87
+    Top = 159
   end
 end

@@ -8,10 +8,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics,
-  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
-  uniGUIClasses, uniGUImClasses, uniGUIRegClasses, uniGUIForm, uniGUImForm, uniGUImJSForm,
-  uniGUIBaseClasses, uniTreeView, unimNestedList, uniTreeMenu, unimTreeMenu,
-  unimMenu, uniImage, unimImage, unimPanel, System.Actions, Vcl.ActnList,
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses, uniGUIClasses,
+  uniGUImClasses, uniGUIRegClasses, uniGUIForm, uniGUImForm, uniGUImJSForm,
+  uniGUIBaseClasses, uniTreeView, unimNestedList, System.Actions, Vcl.ActnList,
   Vcl.Menus, uniMainMenu;
 
 type
@@ -37,7 +36,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uniGUIVars, MainModule, uniGUIApplication, USysBusiness;
+  uniGUIVars, MainModule, USysBusiness;
 
 function fFormMain: TfFormMain;
 begin

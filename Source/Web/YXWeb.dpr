@@ -8,7 +8,8 @@ uses
   UFormLogin in 'UFormLogin.pas' {fFormLogin: TUnimLoginForm},
   UFormNormal in 'UFormNormal.pas' {fFormNormal: TUnimForm},
   UFormSetMate in 'UFormSetMate.pas' {fFormSetMate: TUnimForm},
-  UFormSetPound in 'UFormSetPound.pas' {fFormSetPound: TUnimForm};
+  UFormSetPound in 'UFormSetPound.pas' {fFormSetPound: TUnimForm},
+  UFormGetData in 'UFormGetData.pas' {fFormGetData: TUnimForm};
 
 {$R *.res}
 

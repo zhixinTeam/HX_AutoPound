@@ -8,10 +8,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics,
-  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
-  uniGUIClasses, uniGUImClasses, uniGUIRegClasses, uniGUIForm, uniGUImForm, uniGUImJSForm,
-  uniGUIBaseClasses, uniImage, unimImage, uniEdit, unimEdit, unimToggle,
-  uniButton, unimButton, uniLabel, unimLabel;
+  Controls, Forms, uniGUITypes, uniGUIAbstractClasses, uniGUIClasses,
+  uniGUImClasses, uniGUIRegClasses, uniGUIForm, uniGUImForm, uniGUImJSForm,
+  uniGUIBaseClasses, unimImage, uniEdit, unimEdit, unimToggle,
+  unimButton, unimLabel, uniLabel, uniButton, uniImage;
 
 type
   TfFormLogin = class(TUnimLoginForm)

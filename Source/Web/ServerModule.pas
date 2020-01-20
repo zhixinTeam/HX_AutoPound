@@ -7,8 +7,7 @@ unit ServerModule;
 interface
 
 uses
-  Classes, SysUtils, uniGUIServer, uniGUIMainModule, uniGUIApplication,
-  uIdCustomHTTPServer, uniGUITypes, UManagerGroup, ULibFun;
+  Classes, SysUtils, uniGUIServer, uniGUITypes, UManagerGroup, ULibFun;
 
 type
   TUniServerModule = class(TUniGUIServerModule)

@@ -103,6 +103,7 @@ ResourceString
   sFlag_InputTruck    = 'AllowedInputTruck';         //手动输入车牌
   sFlag_PrePValidLen  = 'PrePValidLength';           //预置皮重时长
   sFlag_PrePValidMon  = 'ValidOneMonth';             //预置皮重当月有效
+  sFlag_PoundList     = 'PoundList';                 //磅站列表
 
   {*数据表*}
   sTable_Factorys     = 'Sys_Factorys';              //工厂列表

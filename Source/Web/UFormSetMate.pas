@@ -7,11 +7,11 @@ unit UFormSetMate;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UFormNormal, uniGUIBaseClasses,
-  uniGUIClasses, uniGUImJSForm, uniBasicGrid, uniDBGrid, unimDBListGrid,
-  unimDBGrid, uniButton, unimButton, Data.DB, Datasnap.DBClient, uniEdit,
-  unimEdit, uniLabel, unimLabel;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  UFormNormal, uniGUIBaseClasses, uniGUIClasses, uniGUImJSForm, uniDBGrid,
+  unimDBGrid, unimButton, Data.DB, Datasnap.DBClient, uniEdit,
+  unimEdit, unimMenu, uniBasicGrid, unimDBListGrid, uniButton;
 
 type
   TfFormSetMate = class(TfFormNormal)
@@ -26,6 +26,7 @@ type
     BtnSortTruck: TUnimButton;
     BtnSortMate: TUnimButton;
     BtnSet: TUnimButton;
+    MenuBottom: TUnimMenu;
     procedure UnimFormCreate(Sender: TObject);
     procedure UnimFormDestroy(Sender: TObject);
     procedure DBGrid1Click(Sender: TObject);
@@ -34,6 +35,7 @@ type
     procedure BtnSortMateClick(Sender: TObject);
     procedure EditTruckChange(Sender: TObject);
     procedure BtnSetClick(Sender: TObject);
+    procedure MenuBottomClick(Sender: TUnimMenuItem);
   private
     { Private declarations }
     FSQLWhere,FSQLOrder: string;
@@ -48,7 +50,7 @@ implementation
 
 {$R *.dfm}
 uses
-  Data.Win.ADODB, ULibFun, USysBusiness, USysDB, USysConst;
+  Data.Win.ADODB, UFormGetData, ULibFun, USysBusiness, USysDB, USysConst;
 
 procedure TfFormSetMate.UnimFormCreate(Sender: TObject);
 begin
@@ -77,9 +79,9 @@ begin
     nStr := Format(nStr, [sTable_Truck, nOrder]);
 
     nQuery := LockDBQuery(ctMain);
-    DBQuery(nStr, nQuery);    
-    nQuery.FieldByName('Checked').ReadOnly := False;    
-    
+    DBQuery(nStr, nQuery);
+    nQuery.FieldByName('Checked').ReadOnly := False;
+
     DSClientDS(nQuery, ClientDS1);
     ActiveControl := DBGrid1;
   finally
@@ -97,6 +99,46 @@ begin
        ClientDS1.FieldByName('Checked').AsString := ''
   else ClientDS1.FieldByName('Checked').AsString := sCheckFlag2;
   ClientDS1.Post;
+end;
+
+procedure TfFormSetMate.MenuBottomClick(Sender: TUnimMenuItem);
+var nBK: TBookmark;
+begin
+  if (not ClientDS1.Active) or (ClientDS1.RecordCount < 1) then Exit;
+  //invalid data
+
+  ClientDS1.DisableControls;
+  nBK := ClientDS1.GetBookmark;
+  try
+    ClientDS1.First;
+    while not ClientDS1.Eof do
+    begin
+      ClientDS1.Edit;
+      case Sender.MenuId of
+       0: ClientDS1.FieldByName('Checked').AsString := sCheckFlag2;
+       1: ClientDS1.FieldByName('Checked').AsString := '';
+       2: //·´Ñ¡
+        begin
+          if ClientDS1.FieldByName('Checked').AsString = sCheckFlag2 then
+               ClientDS1.FieldByName('Checked').AsString := ''
+          else ClientDS1.FieldByName('Checked').AsString := sCheckFlag2;
+        end;
+      end;
+
+      ClientDS1.Post;
+      ClientDS1.Next;
+    end;
+
+    if ClientDS1.BookmarkValid(nBK) then
+      ClientDS1.GotoBookmark(nBK);
+    //xxxxx
+  finally
+    ClientDS1.FreeBookmark(nBK);
+    ClientDS1.EnableControls;
+  end;
+
+  MenuBottom.Visible := False;
+  DBGrid1.Refresh;
 end;
 
 procedure TfFormSetMate.EditTruckChange(Sender: TObject);
@@ -155,22 +197,22 @@ end;
 
 //Desc: ÉèÖÃ
 procedure TfFormSetMate.BtnSetClick(Sender: TObject);
-var nStr: string;
-    nBK: TBookmark; 
+var nStr,nIDs: string;
+    nBK: TBookmark;
 begin
   ClientDS1.DisableControls;
   nBK := ClientDS1.GetBookmark;
   try   
-    nStr := '';
+    nIDs := '';
     ClientDS1.First;
     
     while not ClientDS1.Eof do
     begin
       if ClientDS1.FieldByName('Checked').AsString = sCheckFlag2 then
       begin
-        if nStr <> '' then
-          nStr := nStr + ',';
-        nStr := nStr + ClientDS1.FieldByName('R_ID').AsString;
+        if nIDs <> '' then
+          nIDs := nIDs + ',';
+        nIDs := nIDs + ClientDS1.FieldByName('R_ID').AsString;
       end;
       
       ClientDS1.Next;
@@ -183,6 +225,20 @@ begin
     ClientDS1.FreeBookmark(nBK);
     ClientDS1.EnableControls;
   end;
+
+  if nIDs = '' then Exit;
+  //no selected
+
+  ShowGetMateForm(
+    procedure (const nData: TListItem)
+    begin
+      nStr := 'Update %s Set T_Mate=''%s'',T_MName=''%s'' Where R_ID In(%s)';
+      nStr := Format(nStr, [sTable_Truck, nData.FID, nData.FName, nIDs]);
+
+      DBExecute(nStr);
+      LoadTruckMateData(FSQLWhere + FSQLOrder);
+    end
+  );
 end;
 
 initialization
