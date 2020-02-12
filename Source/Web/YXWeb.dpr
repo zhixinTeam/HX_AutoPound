@@ -9,7 +9,8 @@ uses
   UFormNormal in 'UFormNormal.pas' {fFormNormal: TUnimForm},
   UFormSetMate in 'UFormSetMate.pas' {fFormSetMate: TUnimForm},
   UFormSetPound in 'UFormSetPound.pas' {fFormSetPound: TUnimForm},
-  UFormGetData in 'UFormGetData.pas' {fFormGetData: TUnimForm};
+  UFormGetData in 'UFormGetData.pas' {fFormGetData: TUnimForm},
+  UFormSetBlack in 'UFormSetBlack.pas' {fFormSetBlack: TUnimForm};
 
 {$R *.res}
 

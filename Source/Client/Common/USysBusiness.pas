@@ -27,6 +27,7 @@ type
     FLastTime: TDateTime;                  //上次称重
     FFixPound: string;                     //指定磅站
     FMaxWeight: Double;                    //净重上线
+    FIsValid: Boolean;                     //是否有效
     FServerNow: TDateTime;                 //服务器时间
   end;
 
@@ -130,6 +131,14 @@ begin
 
         if not nNeedPreW then
           Result := True;
+        Exit;
+      end;
+
+      nData.FIsValid := FieldByName('T_Valid').AsString <> sFlag_No;
+      if nVerifyPreDate and (not nData.FIsValid) then
+      begin
+        nStr := '车辆[ %s ]已被管理员列入黑名单.';
+        nHint := Format(nStr, [nData.FTruck]);
         Exit;
       end;
 

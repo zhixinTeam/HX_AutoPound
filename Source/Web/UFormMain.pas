@@ -21,8 +21,13 @@ type
     MenuItemN3: TUniMenuItem;
     PanelMain: TUnimContainerPanel;
     Menu1: TUnimNestedList;
+    MenuReload: TUniMenuItem;
+    MenuS1: TUniMenuItem;
     procedure MenuItemN1Click(Sender: TObject);
     procedure MenuItemN2Click(Sender: TObject);
+    procedure UnimFormCreate(Sender: TObject);
+    procedure MenuReloadClick(Sender: TObject);
+    procedure MenuItemN3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,11 +41,27 @@ implementation
 {$R *.dfm}
 
 uses
-  uniGUIVars, MainModule, USysBusiness;
+  uniGUIVars, MainModule, USysDB, USysBusiness;
 
 function fFormMain: TfFormMain;
 begin
   Result := TfFormMain(UniMainModule.GetFormInstance(TfFormMain));
+end;
+
+procedure TfFormMain.UnimFormCreate(Sender: TObject);
+begin
+  MenuReload.Visible := UniMainModule.FUserConfig.FIsAdmin;
+  MenuS1.Visible := MenuReload.Visible;
+
+  MenuItemN1.Visible := HasPopedom('MAIN_D01', sPopedom_Read);
+  MenuItemN2.Visible := HasPopedom('MAIN_D02', sPopedom_Read);
+  MenuItemN3.Visible := HasPopedom('MAIN_D03', sPopedom_Read);
+end;
+
+procedure TfFormMain.MenuReloadClick(Sender: TObject);
+begin
+  ReloadSystemMemory(False);
+  ShowMessageN('重新加载成功');
 end;
 
 procedure TfFormMain.MenuItemN1Click(Sender: TObject);
@@ -54,6 +75,13 @@ procedure TfFormMain.MenuItemN2Click(Sender: TObject);
 var nForm: TUnimForm;
 begin
   nForm := SystemGetForm('TfFormSetPound');
+  nForm.ShowModal();
+end;
+
+procedure TfFormMain.MenuItemN3Click(Sender: TObject);
+var nForm: TUnimForm;
+begin
+  nForm := SystemGetForm('TfFormSetBlack');
   nForm.ShowModal();
 end;
 

@@ -56,7 +56,9 @@ procedure TfFormSetMate.UnimFormCreate(Sender: TObject);
 begin
   FSQLWhere := '';
   FSQLOrder := '';
-  
+  FEntityName := 'MAIN_D01';
+
+  BtnSet.Enabled := HasPopedom(FEntityName, sPopedom_Edit);
   UserDefineMGrid(ClassName, DBGrid1, True);
   LoadTruckMateData;
 end;

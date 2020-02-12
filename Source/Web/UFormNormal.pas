@@ -17,6 +17,9 @@ type
     procedure UnimFormTitleButtonClick(Sender: TUnimTitleButton);
   private
     { Private declarations }
+  protected
+    FEntityName: string;
+    {*ÊµÌåÃû³Æ*}
   public
     { Public declarations }
   end;

@@ -32,6 +32,7 @@ type
     //列表项
     procedure LoadMateList;
     procedure LoadPoundList;
+    procedure LoadBlackList;
     //载入数据
   public
     { Public declarations }
@@ -39,6 +40,7 @@ type
 
 procedure ShowGetMateForm(const CallBack: TGetDataCallBack);
 procedure ShowGetPoundForm(const CallBack: TGetDataCallBack);
+procedure ShowGetBlackForm(const CallBack: TGetDataCallBack);
 //入口函数
 
 implementation
@@ -73,6 +75,24 @@ begin
   begin
     Caption := '选择磅站';
     LoadPoundList();
+    ShowModal(procedure(Sender: TComponent; Result:Integer)
+    begin
+      if Result = mrOk then
+      begin
+        nIdx := Integer(List1.Items.Objects[List1.ItemIndex]);
+        CallBack(FItems[nIdx]);
+      end;
+    end);
+  end;
+end;
+
+procedure ShowGetBlackForm(const CallBack: TGetDataCallBack);
+var nIdx: Integer;
+begin
+  with TfFormGetData(UniMainModule.GetFormInstance(TfFormGetData)) do
+  begin
+    Caption := '选择状态';
+    LoadBlackList();
     ShowModal(procedure(Sender: TComponent; Result:Integer)
     begin
       if Result = mrOk then
@@ -168,11 +188,32 @@ begin
     List1.Items.EndUpdate;
     ReleaseDBQuery(nQuery);
   end;
+end;
 
-  if Length(FItems) < 1 then
-  begin
-    List1.Items.Add('B1');
-    List1.Items.Add('B2');
+//Desc: 载入黑名单列表
+procedure TfFormGetData.LoadBlackList;
+begin
+  try
+    List1.Items.BeginUpdate;
+    //lock first
+    List1.Clear;
+    SetLength(FItems, 2);
+
+    with FItems[0] do
+    begin
+      FID := 'Y';
+      FName := 'Y、正常';
+      List1.Items.AddObject(FName, Pointer(0));
+    end;
+
+    with FItems[1] do
+    begin
+      FID := 'N';
+      FName := 'N、禁用';
+      List1.Items.AddObject(FName, Pointer(1));
+    end;
+  finally
+    List1.Items.EndUpdate;
   end;
 end;
 

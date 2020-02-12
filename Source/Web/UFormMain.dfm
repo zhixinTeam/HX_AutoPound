@@ -7,6 +7,7 @@ object fFormMain: TfFormMain
   ShowTitle = False
   CloseButton.Visible = False
   TitleButtons = <>
+  OnCreate = UnimFormCreate
   PixelsPerInch = 96
   TextHeight = 13
   ScrollPosition = 0
@@ -49,6 +50,14 @@ object fFormMain: TfFormMain
     object MenuItemN3: TUniMenuItem
       Caption = #25163#21160#25289#40657#36710#36742
       ImageIndex = 12
+      OnClick = MenuItemN3Click
+    end
+    object MenuS1: TUniMenuItem
+      Caption = '-'
+    end
+    object MenuReload: TUniMenuItem
+      Caption = #37325#36733#31995#32479#21442#25968
+      OnClick = MenuReloadClick
     end
   end
 end

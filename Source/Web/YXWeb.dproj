@@ -13,18 +13,8 @@
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Android' and '$(Base)'=='true') or '$(Base_Android)'!=''">
-        <Base_Android>true</Base_Android>
-        <CfgParent>Base</CfgParent>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
         <Base_Win32>true</Base_Win32>
-        <CfgParent>Base</CfgParent>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
-        <Base_Win64>true</Base_Win64>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
@@ -66,10 +56,6 @@
         <VerInfo_Locale>2052</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Base_Android)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;tethering;FireDACDBXDriver;bindengine;DataSnapClient;bindcompdbx;IndyIPServer;IndySystem;fmxFireDAC;FMXTee;DbxCommonDriver;xmlrtl;DataSnapNativeClient;rtl;DbxClientDriver;IndyIPClient;DataSnapProviderClient;DBXInterBaseDriver;bindcompfmx;FmxTeeUI;fmx;dbexpress;IndyCore;dsnap;DataSnapCommon;IndyIPCommon;ibmonitor;ibxpress;ibxbindings;FireDACDSDriver;CustomIPTransport;bindcomp;dbxcds;dsnapxml;dbrtl;IndyProtocols;$(DCC_UsePackage)</DCC_UsePackage>
-        <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;fmx.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services-ads-7.0.0.dex.jar;google-play-services-analytics-7.0.0.dex.jar;google-play-services-base-7.0.0.dex.jar;google-play-services-gcm-7.0.0.dex.jar;google-play-services-identity-7.0.0.dex.jar;google-play-services-maps-7.0.0.dex.jar;google-play-services-panorama-7.0.0.dex.jar;google-play-services-plus-7.0.0.dex.jar;google-play-services-wallet-7.0.0.dex.jar</EnabledSysJars>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;dxSpreadSheetCoreDialogsRS25;dxRibbonCustomizationFormRS25;DBXDb2Driver;dxPSPrVwRibbonRS25;vclactnband;vclFireDAC;cxExportRS25;RemObjects_Server_Synapse_D25;dxSpreadSheetInplaceRichEditRS25;dxHttpIndyRequestRS25;tethering;uniGUI25Chart;dxPScxCommonRS25;FireDACADSDriver;cxPivotGridOLAPRS25;FireDACMSSQLDriver;cxSchedulerGridRS25;vcltouch;vcldb;Intraweb;svn;dxGaugeControlRS25;cxLibraryRS25;vclib;dxFlowChartAdvancedCustomizeFormRS25;FireDACDBXDriver;vclx;RemObjects_Synapse_D25;dxSpreadSheetConditionalFormattingDialogsRS25;dxTileControlRS25;dxMapControlRS25;dxPDFViewerRS25;dxDockingRS25;VCLRESTComponents;dxPSLnksRS25;dxWizardControlRS25;dxRichEditControlRS25;vclie;bindengine;dxFireDACServerModeRS25;FireDACMySQLDriver;DataSnapClient;dxPSdxPDFViewerLnkRS25;bindcompdbx;dxPSdxLCLnkRS25;DBXSybaseASEDriver;IndyIPServer;IndySystem;dsnapcon;dxPSRichEditControlLnkRS25;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;dOPC250;dxdbtrRS25;dxPScxTLLnkRS25;emshosting;dxSpreadSheetRS25;DBXOdbcDriver;FireDACTDataDriver;FMXTee;cxGridRS25;dxSpreadSheetCoreConditionalFormattingDialogsRS25;DbxCommonDriver;dxPScxSchedulerLnkRS25;dxorgcRS25;dxCloudServiceLibraryRS25;xmlrtl;DataSnapNativeClient;fmxobj;dxPScxGridLnkRS25;rtl;DbxClientDriver;DBXSybaseASADriver;dxPSCoreRS25;dxmdsRS25;appanalytics;IndyIPClient;bindcompvcl;dxADOEMFRS25;TeeUI;VclSmp;FireDACODBCDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;FireDACMongoDBDriver;cxVerticalGridRS25;dxtrmdRS25;dxADOServerModeRS25;DataSnapServerMidas;dxCoreRS25;cxSchedulerTreeBrowserRS25;dxRichEditControlCoreRS25;DBXInterBaseDriver;dxPSTeeChartRS25;svnui;DBXMSSQLDriver;dxPSdxFCLnkRS25;dxRichEditCoreRS25;DatasnapConnectorsFreePascal;bindcompfmx;DBXOracleDriver;inetdb;FmxTeeUI;emsedge;fmx;fmxdae;dxPScxPivotGridLnkRS25;dxTabbedMDIRS25;dxBarDBNavRS25;dbexpress;IndyCore;dxFlowChartRS25;dxRichEditDocumentModelRS25;dsnap;DataSnapCommon;dxBarRS25;dxPSDBTeeChartRS25;dxdborRS25;DataSnapConnectors;uniGUI25m;dxPScxExtCommonRS25;cxPivotGridRS25;dxPSdxSpreadSheetLnkRS25;dxSpreadSheetReportDesignerRS25;dxNavBarRS25;cxSchedulerRibbonStyleEventEditorRS25;FireDACOracleDriver;DBXMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;cxTreeListRS25;IndyIPCommon;vcl;dxPScxVGridLnkRS25;dxBarExtItemsRS25;dxSkinsCoreRS25;dxComnRS25;FireDACDb2Driver;dxPSdxDBTVLnkRS25;TeeDB;dxSpreadSheetCoreRS25;dxServerModeRS25;dxPScxPCProdRS25;dxFlowChartLayoutsRS25;FireDACPgDriver;ibmonitor;FireDACASADriver;dxEMFRS25;ibxpress;Tee;DataSnapServer;ibxbindings;dxPsPrVwAdvRS25;FireDACDSDriver;vclwinx;dxRichEditInplaceRS25;cxTreeListdxBarPopupMenuRS25;CustomIPTransport;vcldsnap;cxSchedulerWebServiceStorageRS25;dxPSdxOCLnkRS25;bindcomp;DBXInformixDriver;cxPivotGridChartRS25;cxSchedulerRS25;dxBarExtDBItemsRS25;dxDBXServerModeRS25;dxFireDACEMFRS25;dxGDIPlusRS25;dxPSdxGaugeControlLnkRS25;FlatStyle;dbxcds;adortl;uniGUI25VCL;dxPSdxDBOCLnkRS25;dxRibbonRS25;dsnapxml;dxSpellCheckerRS25;dbrtl;IndyProtocols;inetdbxpress;dxFlowChartDesignerRS25;uSynEdit_R2021;dxPSdxMapControlLnkRS25;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
@@ -80,9 +66,6 @@
         <DCC_UnitSearchPath>..\Common;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_ExeOutput>..\..\Bin\Web</DCC_ExeOutput>
         <DCC_DcuOutput>..\..\Dcu\Web</DCC_DcuOutput>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;dxSpreadSheetCoreDialogsRS25;dxRibbonCustomizationFormRS25;DBXDb2Driver;dxPSPrVwRibbonRS25;vclactnband;vclFireDAC;cxExportRS25;RemObjects_Server_Synapse_D25;dxSpreadSheetInplaceRichEditRS25;dxHttpIndyRequestRS25;tethering;uniGUI25Chart;dxPScxCommonRS25;FireDACADSDriver;cxPivotGridOLAPRS25;FireDACMSSQLDriver;cxSchedulerGridRS25;vcltouch;vcldb;Intraweb;dxGaugeControlRS25;cxLibraryRS25;vclib;dxFlowChartAdvancedCustomizeFormRS25;FireDACDBXDriver;vclx;RemObjects_Synapse_D25;dxSpreadSheetConditionalFormattingDialogsRS25;dxTileControlRS25;dxMapControlRS25;dxPDFViewerRS25;dxDockingRS25;VCLRESTComponents;dxPSLnksRS25;dxWizardControlRS25;dxRichEditControlRS25;vclie;bindengine;dxFireDACServerModeRS25;FireDACMySQLDriver;DataSnapClient;dxPSdxPDFViewerLnkRS25;bindcompdbx;dxPSdxLCLnkRS25;DBXSybaseASEDriver;IndyIPServer;IndySystem;dsnapcon;dxPSRichEditControlLnkRS25;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;dOPC250;dxdbtrRS25;dxPScxTLLnkRS25;emshosting;dxSpreadSheetRS25;DBXOdbcDriver;FireDACTDataDriver;FMXTee;cxGridRS25;dxSpreadSheetCoreConditionalFormattingDialogsRS25;DbxCommonDriver;dxPScxSchedulerLnkRS25;dxorgcRS25;dxCloudServiceLibraryRS25;xmlrtl;DataSnapNativeClient;fmxobj;dxPScxGridLnkRS25;rtl;DbxClientDriver;DBXSybaseASADriver;dxPSCoreRS25;dxmdsRS25;appanalytics;IndyIPClient;bindcompvcl;dxADOEMFRS25;TeeUI;VclSmp;FireDACODBCDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;FireDACMongoDBDriver;cxVerticalGridRS25;dxtrmdRS25;dxADOServerModeRS25;DataSnapServerMidas;dxCoreRS25;cxSchedulerTreeBrowserRS25;dxRichEditControlCoreRS25;DBXInterBaseDriver;dxPSTeeChartRS25;DBXMSSQLDriver;dxPSdxFCLnkRS25;dxRichEditCoreRS25;DatasnapConnectorsFreePascal;bindcompfmx;DBXOracleDriver;inetdb;FmxTeeUI;emsedge;fmx;fmxdae;dxPScxPivotGridLnkRS25;dxTabbedMDIRS25;dxBarDBNavRS25;dbexpress;IndyCore;dxFlowChartRS25;dxRichEditDocumentModelRS25;dsnap;DataSnapCommon;dxBarRS25;dxPSDBTeeChartRS25;dxdborRS25;DataSnapConnectors;uniGUI25m;dxPScxExtCommonRS25;cxPivotGridRS25;dxPSdxSpreadSheetLnkRS25;dxSpreadSheetReportDesignerRS25;dxNavBarRS25;cxSchedulerRibbonStyleEventEditorRS25;FireDACOracleDriver;DBXMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;cxTreeListRS25;IndyIPCommon;vcl;dxPScxVGridLnkRS25;dxBarExtItemsRS25;dxSkinsCoreRS25;dxComnRS25;FireDACDb2Driver;dxPSdxDBTVLnkRS25;TeeDB;dxSpreadSheetCoreRS25;dxServerModeRS25;dxPScxPCProdRS25;dxFlowChartLayoutsRS25;FireDACPgDriver;ibmonitor;FireDACASADriver;dxEMFRS25;ibxpress;Tee;DataSnapServer;ibxbindings;dxPsPrVwAdvRS25;FireDACDSDriver;vclwinx;dxRichEditInplaceRS25;cxTreeListdxBarPopupMenuRS25;CustomIPTransport;vcldsnap;cxSchedulerWebServiceStorageRS25;dxPSdxOCLnkRS25;bindcomp;DBXInformixDriver;cxPivotGridChartRS25;cxSchedulerRS25;dxBarExtDBItemsRS25;dxDBXServerModeRS25;dxFireDACEMFRS25;dxGDIPlusRS25;dxPSdxGaugeControlLnkRS25;dbxcds;adortl;uniGUI25VCL;dxPSdxDBOCLnkRS25;dxRibbonRS25;dsnapxml;dxSpellCheckerRS25;dbrtl;IndyProtocols;inetdbxpress;dxFlowChartDesignerRS25;uSynEdit_R2021;dxPSdxMapControlLnkRS25;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -153,6 +136,11 @@
         </DCCReference>
         <DCCReference Include="UFormGetData.pas">
             <Form>fFormGetData</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TUnimForm</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UFormSetBlack.pas">
+            <Form>fFormSetBlack</Form>
             <FormType>dfm</FormType>
             <DesignClass>TUnimForm</DesignClass>
         </DCCReference>
@@ -605,9 +593,7 @@
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
-                <Platform value="Android">False</Platform>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
             </Platforms>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
