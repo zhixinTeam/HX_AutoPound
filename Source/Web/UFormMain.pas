@@ -59,9 +59,20 @@ begin
 end;
 
 procedure TfFormMain.MenuReloadClick(Sender: TObject);
+var nStr: string;
 begin
-  ReloadSystemMemory(False);
-  ShowMessageN('重新加载成功');
+  nStr := '系统将重新加载用户、权限、菜单项等运行时数据.' + #13#10 +
+          '继续请点"是"';
+  MessageDlg(nStr, mtConfirmation, mbYesNo,
+    procedure(Sender: TComponent; Res: Integer)
+    begin
+      if Res = mrYes then
+      begin
+        ReloadSystemMemory(False);
+        ShowMessageN('重新加载成功');
+      end;
+    end);
+  //xxxxx
 end;
 
 procedure TfFormMain.MenuItemN1Click(Sender: TObject);
